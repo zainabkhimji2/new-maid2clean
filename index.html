@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maid2Clean - Professional Cleaning Solutions</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/styles.css" />
+  <style>
+     @media (min-width: 640px) {
+      .mobile-logo-text {
+        display: none !important;
+      }}
+      .cart-notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #4CAF50;
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    display: none;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    animation: slideIn 0.3s ease-out;
+  }
+
+  @keyframes slideIn {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+  }
+
+  .cart-notification.show {
+    display: flex;
+  }
+
+  .checkmark {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+  }
+  </style>
+
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased">
+  <nav id="navbar" class="flex items-center justify-between px-4 sm:px-6 py-3 bg-indigo-800 text-white sticky top-0 z-50 transition-all duration-500 shadow-md">
+    <div class="text-2xl sm:text-3xl font-bold tracking-tight px-4 sm:px-10">
+      <a href="./index.html" class="hover:text-blue-300 transition-colors duration-300 flex items-center">
+        <div class="bg-white p-1 rounded-full mr-2">
+          <img src="./images/logo.png" alt="logo" class="w-8 h-8 sm:w-10 sm:h-10" />
+        </div>
+        <!-- Added mobile visible text -->
+        <span class="mobile-logo-text">Maid2Clean</span>
+        <span class="hidden sm:inline">Maid2Clean</span>
+      </a>
+    </div>
+
+    <!-- Desktop Right Side Elements (hidden on mobile) -->
+    <div class="hidden sm:flex items-center gap-4 px-10">
+      <!-- Contact Us with vertical line -->
+      <div class="flex items-center">
+        <a href="contact.html" class="relative group px-3 hover:text-orange-300 transition-colors duration-300">
+          Contact Us
+          <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-orange-300 group-hover:w-4/5 transition-all duration-300"></span>
+        </a>
+        <div class="h-6 w-px bg-indigo-600 mx-2"></div>
+      </div>
+
+      <!-- Cart with text and vertical line -->
+      <div class="flex items-center">
+        <a href="checkout.html" class="relative flex items-center group px-1">
+          <div class="flex items-center">
+            <span class="ml-1 group-hover:text-orange-300 transition-colors duration-300 px-1">Cart</span>
+
+            <svg class="w-6 h-6 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <span id="cartCount" class="absolute -top-2 -right-2 bg-orange-400 text-xs text-gray-900 rounded-full w-5 h-5 flex items-center justify-center font-bold group-hover:scale-110 transition-transform duration-300">0</span>
+        </a>
+        <div class="h-6 w-px bg-indigo-600 mx-6"></div>
+      </div>
+
+      <!-- Social Icons (all same size) - Hidden on mobile -->
+      <div class="flex items-center gap-3">
+        <a href="https://www.facebook.com/" class="hover:scale-110 transition-transform duration-300">
+          <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="24" height="24" rx="6" fill="url(#facebook-gradient)"/>
+            <path d="M16.5 7.5H13.5V6C13.5 5.17157 14.1716 4.5 15 4.5H16.5V1.5H13.5C10.7386 1.5 8.5 3.73858 8.5 6.5V7.5H6V10.5H8.5V19.5H12V10.5H15L16.5 7.5Z" fill="white"/>
+            
+            <defs>
+              <linearGradient id="facebook-gradient" x1="0" y1="0" x2="1" y1="1">
+                <stop offset="0%" stop-color="#1877F2"/>
+                <stop offset="50%" stop-color="#0A5AC2"/>
+                <stop offset="100%" stop-color="#054396"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </a>
+        
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/" class="hover:scale-110 transition-transform duration-300 p-1">
+          <svg class="w-6 h-6" fill="url(#instagram-gradient)" viewBox="0 0 24 24">
+            <defs>
+              <linearGradient id="instagram-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#833AB4"/>
+                <stop offset="50%" stop-color="#FD1D1D"/>
+                <stop offset="100%" stop-color="#FCB045"/>
+              </linearGradient>
+            </defs>
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+          </svg>
+        </a>
+        
+        <!-- TikTok (replaced Twitter) -->
+        <a href="https://www.tiktok.com/" class="hover:scale-110 transition-transform duration-300 p-1">
+          <svg class="w-6 h-6" fill="#000000" viewBox="0 0 24 24">
+            <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+          </svg>
+        </a>
+        
+        <!-- WhatsApp -->
+        <a href="https://wa.me/1234567890" class="hover:scale-110 transition-transform duration-300 p-1">
+          <svg class="w-6 h-6" fill="#25D366" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Mobile Menu Button (visible only on mobile) -->
+<div class="flex items-center gap-1 sm:hidden"> 
+  <!-- Cart button moved here from desktop section -->
+  <div class="flex items-center">
+    <a href="checkout.html" class="relative flex items-center group px-1">
+      <div class="flex items-center">
+        <span class="ml-1 group-hover:text-orange-300 transition-colors duration-300 px-1">Cart</span>
+
+        <svg class="w-6 h-6 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <span id="cartCount" class="absolute -top-2 -right-2 bg-orange-400 text-xs text-gray-900 rounded-full w-5 h-5 flex items-center justify-center font-bold group-hover:scale-110 transition-transform duration-300">0</span>
+    </a>
+    <div class="h-6 w-px bg-indigo-600 mx-6"></div>
+  </div>
+  
+  <button id="menuToggle" class="focus:outline-none p-1 rounded-lg hover:bg-indigo-700 transition-colors duration-300">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"> 
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+    </svg>
+  </button>
+</div>
+  </nav>
+  
+  <!-- Mobile Menu (contains social icons only on mobile) -->
+  <div id="mobileMenu" class="hidden bg-indigo-700 text-white px-6 py-4 shadow-lg sm:hidden">
+    <div class="flex flex-col space-y-4">
+      <a href="contact.html" class="block py-2 hover:text-orange-300 transition-colors duration-300 border-b border-indigo-600">Contact Us</a>
+      <a href="checkout.html" class="block py-2 hover:text-orange-300 transition-colors duration-300 border-b border-indigo-600">Checkout</a>
+      
+      <!-- Social Icons (only shown in mobile menu) -->
+      <div class="flex justify-center gap-6 py-3">
+        <!-- Updated Facebook Icon -->
+        <a href="https://www.facebook.com/" class="hover:scale-110 transition-transform duration-300">
+          <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Background circle with gradient -->
+            <rect width="24" height="24" rx="6" fill="url(#facebook-gradient)"/>
+            <!-- Facebook "f" logo -->
+            <path d="M16.5 7.5H13.5V6C13.5 5.17157 14.1716 4.5 15 4.5H16.5V1.5H13.5C10.7386 1.5 8.5 3.73858 8.5 6.5V7.5H6V10.5H8.5V19.5H12V10.5H15L16.5 7.5Z" fill="white"/>
+            
+            <!-- Gradient definition -->
+            <defs>
+              <linearGradient id="facebook-gradient" x1="0" y1="0" x2="1" y1="1">
+                <stop offset="0%" stop-color="#1877F2"/>
+                <stop offset="50%" stop-color="#0A5AC2"/>
+                <stop offset="100%" stop-color="#054396"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </a>
+        
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/" class="hover:scale-110 transition-transform duration-300">
+          <svg class="w-7 h-7" fill="url(#instagram-gradient-mobile)" viewBox="0 0 24 24">
+            <defs>
+              <linearGradient id="instagram-gradient-mobile" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#833AB4"/>
+                <stop offset="50%" stop-color="#FD1D1D"/>
+                <stop offset="100%" stop-color="#FCB045"/>
+              </linearGradient>
+            </defs>
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+          </svg>
+        </a>
+        
+        <!-- TikTok (replaced Twitter) -->
+        <a href="https://www.tiktok.com/" class="hover:scale-110 transition-transform duration-300">
+          <svg class="w-7 h-7" fill="#000000" viewBox="0 0 24 24">
+            <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+          </svg>
+        </a>
+        
+        <!-- WhatsApp -->
+        <a href="https://wa.me/1234567890" class="hover:scale-110 transition-transform duration-300">
+          <svg class="w-7 h-7" fill="#25D366" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero Banner Section -->
+  <section class="relative w-full h-[70vh] sm:h-[80vh] md:h-[90vh] overflow-hidden">
+    <div class="swiper h-full">
+      <div class="swiper-wrapper">
+        <!-- Slide 1 - Woman mopping -->
+        <div class="swiper-slide">
+          <div class="absolute inset-0">
+            <img 
+              src="./images/girl.avif" 
+              alt="Woman mopping floor with modern mop"
+              class="w-full h-full object-cover"
+              loading="lazy"
+            >
+          </div>
+          <div class="h-full bg-gradient-to-b from-transparent to-blue-900/80 flex items-center relative">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-left">
+              <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
+                <span class="block">Professional Cleaning</span>
+                <span class="block">Made Simple</span>
+              </h1>
+              <p class="text-base sm:text-lg md:text-xl text-white/90 mb-6 max-w-md sm:max-w-lg">
+                Premium mops that make cleaning effortless and effective.
+              </p>
+              <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
+                <a href="#products" class="w-full sm:w-auto text-center px-6 py-3 bg-orange-400 text-gray-900 font-semibold rounded-full hover:bg-orange-500 hover:shadow-lg transition-all duration-300 text-sm sm:text-base">
+                  Shop Now
+                </a>
+                <a href="#deals" class="w-full sm:w-auto text-center px-6 py-3 bg-white/20 text-white font-semibold rounded-full hover:bg-white/30 hover:shadow-lg transition-all duration-300 border border-white/30 text-sm sm:text-base">
+                  View Deals
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Slide 2 - Man cleaning windows -->
+        <div class="swiper-slide">
+          <div class="absolute inset-0">
+            <img 
+              src="./images/sponge.avif" 
+              alt="Man cleaning windows with professional tools"
+              class="w-full h-full object-cover"
+              loading="lazy"
+            >
+          </div>
+          <div class="h-full bg-gradient-to-b from-transparent to-blue-900/80 flex items-center relative">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-left">
+              <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
+                <span class="block">Professional Grade</span>
+                <span class="block">Cleaning Tools</span>
+              </h1>
+              <p class="text-base sm:text-lg md:text-xl text-white/90 mb-6 max-w-md sm:max-w-lg">
+                Used by cleaning professionals worldwide.
+              </p>
+              <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
+                <a href="#products" class="w-full sm:w-auto text-center px-6 py-3 bg-orange-400 text-gray-900 font-semibold rounded-full hover:bg-orange-500 hover:shadow-lg transition-all duration-300 text-sm sm:text-base">
+                  Shop Now
+                </a>
+                <a href="#featured" class="w-full sm:w-auto text-center px-6 py-3 bg-white/20 text-white font-semibold rounded-full hover:bg-white/30 hover:shadow-lg transition-all duration-300 border border-white/30 text-sm sm:text-base">
+                  View Products
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Slide 3 - Team cleaning -->
+        <div class="swiper-slide">
+          <div class="absolute inset-0">
+            <img 
+              src="./images/girl2.avif" 
+              alt="Cleaning team working together"
+              class="w-full h-full object-cover"
+              loading="lazy"
+            >
+          </div>
+          <div class="h-full bg-gradient-to-b from-transparent to-blue-900/80 flex items-center relative">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-left">
+              <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
+                <span class="block">Complete Cleaning</span>
+                <span class="block">Solutions</span>
+              </h1>
+              <p class="text-base sm:text-lg md:text-xl text-white/90 mb-6 max-w-md sm:max-w-lg">
+                Everything you need for a spotless home or business.
+              </p>
+              <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
+                <a href="#products" class="w-full sm:w-auto text-center px-6 py-3 bg-orange-400 text-gray-900 font-semibold rounded-full hover:bg-orange-500 hover:shadow-lg transition-all duration-300 text-sm sm:text-base">
+                  Shop Now
+                </a>
+                <a href="#bundles" class="w-full sm:w-auto text-center px-6 py-3 bg-white/20 text-white font-semibold rounded-full hover:bg-white/30 hover:shadow-lg transition-all duration-300 border border-white/30 text-sm sm:text-base">
+                  View Bundles
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Slide 4 - Woman with spin mop -->
+        <div class="swiper-slide">
+          <div class="absolute inset-0">
+            <img 
+              src="./images/wiper.avif" 
+              alt="Woman using spin mop"
+              class="w-full h-full object-cover"
+              loading="lazy"
+            >
+          </div>
+          <div class="h-full bg-gradient-to-b from-transparent to-blue-900/80 flex items-center relative">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-left">
+              <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
+                <span class="block">Innovative</span>
+                <span class="block">Mop Technology</span>
+              </h1>
+              <p class="text-base sm:text-lg md:text-xl text-white/90 mb-6 max-w-md sm:max-w-lg">
+                Our spin mops make floor cleaning faster and easier.
+              </p>
+              <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
+                <a href="#products" class="w-full sm:w-auto text-center px-6 py-3 bg-orange-400 text-gray-900 font-semibold rounded-full hover:bg-orange-500 hover:shadow-lg transition-all duration-300 text-sm sm:text-base">
+                  Shop Now
+                </a>
+                <a href="#technology" class="w-full sm:w-auto text-center px-6 py-3 bg-white/20 text-white font-semibold rounded-full hover:bg-white/30 hover:shadow-lg transition-all duration-300 border border-white/30 text-sm sm:text-base">
+                  Learn More
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Navigation -->
+      <div class="swiper-pagination absolute bottom-4 sm:bottom-6 md:bottom-8"></div>
+      <div class="swiper-button-prev hidden sm:block text-white left-2 sm:left-4"></div>
+      <div class="swiper-button-next hidden sm:block text-white right-2 sm:right-4"></div>
+    </div>
+  </section>
+  <!-- Services Marquee Section -->
+<section class="mt-6 py-2 bg-blue-800 overflow-hidden">
+  <div class="relative">
+    <div class="flex items-center animate-marquee whitespace-nowrap">
+      <span class="mx-8 text-2xl sm:text-3xl font-bold text-white">Best Cleaning</span>
+      <span class="mx-8 text-2xl sm:text-3xl font-bold text-white">Door Cleaning</span>
+      <span class="mx-8 text-2xl sm:text-3xl font-bold text-white">Free Shipping</span>
+      <span class="mx-8 text-2xl sm:text-3xl font-bold text-white">Hot Deals</span>
+      
+      
+      <!-- Duplicate for seamless looping -->
+      <span class="mx-8 text-2xl sm:text-3xl font-bold text-white">Best Cleaning</span>
+      <span class="mx-8 text-2xl sm:text-3xl font-bold text-white">Door Cleaning</span>
+      <span class="mx-8 text-2xl sm:text-3xl font-bold text-white">Free Shipping</span>
+      <span class="mx-8 text-2xl sm:text-3xl font-bold text-white">Hot Deals</span>
+    </div>
+  </div>
+</section>
+
+  <!-- Features Section -->
+  <section id="products" class="py-16 px-4 sm:px-6 md:px-12 bg-gray-50">
+    <div class="container mx-auto">
+      <div class="text-center mb-12">
+        <h2 class="section-title text-3xl sm:text-4xl font-bold text-blue-900 mb-3">Our Best Selling Mops</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">Professional-grade mops trusted by cleaning experts worldwide</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="product-container">
+        <!-- Initial 4 products will be shown here -->
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 hidden" id="more-products-container">
+        <!-- Additional 4 products will be shown here when "View More" is clicked -->
+      </div>
+      <div class="text-center mt-12">
+        <button id="view-more-btn" class="inline-block px-8 py-3 border-2 border-blue-900 text-blue-900 font-semibold rounded-full hover:bg-blue-900 hover:text-white transition-colors duration-300">
+          View More Products
+        </button>
+      </div>
+    </div>
+  </section>
+
+  
+
+  <!-- Deals Spotlight Section -->
+  <section id="deals" class="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-50 to-orange-50">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-10 sm:mb-14 lg:mb-16">
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-blue-900 mb-3 leading-tight">Today's Hot Deals</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base">Limited time offers on our most popular cleaning bundles</p>
+      </div>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8" id="deals-container">
+        <!-- Deal 1 -->
+        <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+          <div class="relative aspect-[4/3]">
+            <img src="./images/liquid1.png" 
+                 alt="Mop Bundle" 
+                 class="w-full h-full object-cover"
+                 loading="lazy" />
+            <div class="absolute top-4 left-4 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">30% OFF</div>
+          </div>
+          <div class="p-5 sm:p-6">
+            <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-2">Complete Mop Bundle</h3>
+            <p class="text-xs sm:text-sm text-gray-600 mb-4">Includes TurboSpin Mop, 3 microfiber pads, and premium floor cleaner</p>
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div class="flex items-baseline gap-2">
+                <span class="text-lg font-bold text-blue-900">$49.99</span>
+                <span class="text-xs sm:text-sm text-gray-500 line-through">$71.97</span>
+              </div>
+              <button class="w-full sm:w-auto px-4 py-2 bg-orange-400 hover:bg-orange-500 text-gray-900 text-sm sm:text-base font-medium rounded-full transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-opacity-50 add-to-cart" 
+                      data-name="Complete Mop Bundle" 
+                      data-price="49.99"
+                      data-id="deal-1"
+                      data-image="./images/liquid1.png">
+                Grab Deal
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Deal 2 -->
+        <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+          <div class="relative aspect-[4/3]">
+            <img src="./images/liquid2.png" 
+                 alt="Starter Kit" 
+                 class="w-full h-full object-cover"
+                 loading="lazy" />
+            <div class="absolute top-4 left-4 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">BEST VALUE</div>
+          </div>
+          <div class="p-5 sm:p-6">
+            <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-2">Cleaning Starter Kit</h3>
+            <p class="text-xs sm:text-sm text-gray-600 mb-4">Everything you need to keep your floors spotless - mop, broom, dustpan</p>
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div class="flex items-baseline gap-2">
+                <span class="text-lg font-bold text-blue-900">$39.99</span>
+                <span class="text-xs sm:text-sm text-gray-500 line-through">$59.99</span>
+              </div>
+              <button class="w-full sm:w-auto px-4 py-2 bg-orange-400 hover:bg-orange-500 text-gray-900 text-sm sm:text-base font-medium rounded-full transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-opacity-50 add-to-cart" 
+                      data-name="Cleaning Starter Kit" 
+                      data-price="39.99"
+                      data-id="deal-2"
+                      data-image="./images/liquid2.png">
+                Grab Deal
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Deal 3 -->
+        <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+          <div class="relative aspect-[4/3]">
+            <img src="./images/liquid3.png" 
+                 alt="Refill Pack" 
+                 class="w-full h-full object-cover"
+                 loading="lazy" />
+            <div class="absolute top-4 left-4 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">LIMITED</div>
+          </div>
+          <div class="p-5 sm:p-6">
+            <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-2">Microfiber Refill Pack</h3>
+            <p class="text-xs sm:text-sm text-gray-600 mb-4">12 premium microfiber mop pads for all your mopping needs</p>
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div class="flex items-baseline gap-2">
+                <span class="text-lg font-bold text-blue-900">$24.99</span>
+                <span class="text-xs sm:text-sm text-gray-500 line-through">$35.99</span>
+              </div>
+              <button class="w-full sm:w-auto px-4 py-2 bg-orange-400 hover:bg-orange-500 text-gray-900 text-sm sm:text-base font-medium rounded-full transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-opacity-50 add-to-cart" 
+                      data-name="Microfiber Refill Pack" 
+                      data-price="24.99"
+                      data-id="deal-3"
+                      data-image="./images/liquid3.png">
+                Grab Deal
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Hidden deals - now with proper spacing when revealed -->
+      <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 hidden mt-0" id="more-deals-container">
+        <!-- Deal 4 -->
+        <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+          <div class="relative aspect-[4/3]">
+            <img src="./images/liquid1.png" 
+                 alt="Broom Set" 
+                 class="w-full h-full object-cover"
+                 loading="lazy" />
+            <div class="absolute top-4 left-4 bg-purple-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">NEW</div>
+          </div>
+          <div class="p-5 sm:p-6">
+            <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-2">Premium Broom Set</h3>
+            <p class="text-xs sm:text-sm text-gray-600 mb-4">Ergonomic broom with dustpan and stand for easy storage</p>
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div class="flex items-baseline gap-2">
+                <span class="text-lg font-bold text-blue-900">$29.99</span>
+                <span class="text-xs sm:text-sm text-gray-500 line-through">$39.99</span>
+              </div>
+              <button class="w-full sm:w-auto px-4 py-2 bg-orange-400 hover:bg-orange-500 text-gray-900 text-sm sm:text-base font-medium rounded-full transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-opacity-50 add-to-cart" 
+                      data-name="Premium Broom Set" 
+                      data-price="29.99"
+                      data-id="deal-4"
+                      data-image="./images/liquid1.png">
+                Grab Deal
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Deal 5 -->
+        <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+          <div class="relative aspect-[4/3]">
+            <img src="./images/liquid2.png" 
+                 alt="Vacuum Cleaner" 
+                 class="w-full h-full object-cover"
+                 loading="lazy" />
+            <div class="absolute top-4 left-4 bg-yellow-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">TOP RATED</div>
+          </div>
+          <div class="p-5 sm:p-6">
+            <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-2">Power Vacuum Cleaner</h3>
+            <p class="text-xs sm:text-sm text-gray-600 mb-4">Lightweight yet powerful vacuum for all floor types</p>
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div class="flex items-baseline gap-2">
+                <span class="text-lg font-bold text-blue-900">$89.99</span>
+                <span class="text-xs sm:text-sm text-gray-500 line-through">$119.99</span>
+              </div>
+              <button class="w-full sm:w-auto px-4 py-2 bg-orange-400 hover:bg-orange-500 text-gray-900 text-sm sm:text-base font-medium rounded-full transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-opacity-50 add-to-cart" 
+                      data-name="Power Vacuum Cleaner" 
+                      data-price="89.99"
+                      data-id="deal-5"
+                      data-image="./images/liquid2.png">
+                Grab Deal
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Deal 6 -->
+        <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+          <div class="relative aspect-[4/3]">
+            <img src="./images/liquid3.png" 
+                 alt="Cleaning Solution" 
+                 class="w-full h-full object-cover"
+                 loading="lazy" />
+            <div class="absolute top-4 left-4 bg-pink-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">ECO</div>
+          </div>
+          <div class="p-5 sm:p-6">
+            <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-2">Eco Cleaning Solution</h3>
+            <p class="text-xs sm:text-sm text-gray-600 mb-4">Natural, biodegradable cleaning solution for all surfaces</p>
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div class="flex items-baseline gap-2">
+                <span class="text-lg font-bold text-blue-900">$14.99</span>
+                <span class="text-xs sm:text-sm text-gray-500 line-through">$19.99</span>
+              </div>
+              <button class="w-full sm:w-auto px-4 py-2 bg-orange-400 hover:bg-orange-500 text-gray-900 text-sm sm:text-base font-medium rounded-full transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-opacity-50 add-to-cart" 
+                      data-name="Eco Cleaning Solution" 
+                      data-price="14.99"
+                      data-id="deal-6"
+                      data-image="./images/liquid3.png">
+                Grab Deal
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="text-center mt-10 sm:mt-12">
+        <button id="view-more-deals" class="inline-block px-6 py-2 sm:px-8 sm:py-3 border-2 border-blue-900 text-blue-900 font-medium sm:font-semibold rounded-full hover:bg-blue-900 hover:text-white transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:ring-opacity-50">
+          View More Deals
+        </button>
+      </div>
+    </div>
+</section>
+
+
+  <!-- Eco-Friendly Section -->
+  <section id="eco" class="py-16 px-4 sm:px-6 md:px-12 bg-white">
+    <div class="container mx-auto">
+      <div class="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+        <div class="lg:w-1/2 w-full fade-in rounded-2xl overflow-hidden shadow-xl relative group">
+          <div class="aspect-w-16 aspect-h-9 w-full h-full">
+            <video 
+              class="w-full h-full object-cover rounded-2xl transition-transform duration-500 group-hover:scale-105" 
+              autoplay 
+              muted 
+              loop
+              playsinline
+              preload="auto"
+            >
+              <source src="./images/cleaning.mp4" type="video/mp4">
+            </video>
+          </div>
+          
+          <!-- Play Button (visible only if video is paused) -->
+          <button class="video-play-button absolute inset-0 m-auto w-16 h-16 bg-white bg-opacity-80 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 focus:outline-none">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-green-600" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+            </svg>
+          </button>
+        </div>
+  
+        <!-- Content (Right Side) -->
+        <div class="lg:w-1/2 w-full fade-in fade-in-delay-1">
+          <h2 class="section-title text-3xl sm:text-4xl font-bold text-blue-900 mb-4 leading-tight">Eco-Friendly Cleaning Solutions</h2>
+          <p class="text-gray-600 mb-6 text-lg">Our sustainable cleaning products are designed to give you a spotless home while being gentle on the environment. Free from harsh chemicals and made with biodegradable materials.</p>
+          
+          <ul class="space-y-4 mb-8">
+            <li class="flex items-start">
+              <div class="bg-green-100 p-1 rounded-full mr-3 flex-shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <span class="text-gray-700 text-lg">100% biodegradable mop heads and pads</span>
+            </li>
+            <li class="flex items-start">
+              <div class="bg-green-100 p-1 rounded-full mr-3 flex-shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <span class="text-gray-700 text-lg">Plant-based cleaning solutions included</span>
+            </li>
+            <li class="flex items-start">
+              <div class="bg-green-100 p-1 rounded-full mr-3 flex-shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <span class="text-gray-700 text-lg">Recyclable packaging materials</span>
+            </li>
+            <li class="flex items-start">
+              <div class="bg-green-100 p-1 rounded-full mr-3 flex-shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <span class="text-gray-700 text-lg">Energy-efficient manufacturing process</span>
+            </li>
+          </ul>
+          
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a href="#" class="px-6 py-3 bg-green-600 text-white font-semibold rounded-full hover:bg-green-700 transition-colors duration-300 text-center text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+              Explore Eco Products
+            </a>
+            <a href="#" class="px-6 py-3 border-2 border-green-600 text-green-600 font-semibold rounded-full hover:bg-green-50 transition-colors duration-300 text-center text-lg">
+              How It Works
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Header -->
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-gray-900 mb-4">Professional Cleaning Kits</h2>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto">Choose the perfect bundle for spotless cleaning</p>
+        </div>
+
+        <!-- Product Bundles -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <!-- Basic Kit -->
+            <div class="flex flex-col bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100">
+                <div class="p-6 flex flex-col flex-grow">
+                    <div class="mb-6 flex-grow">
+                        <div class="h-48 bg-blue-50 rounded-lg mb-4 flex items-center justify-center">
+                            <img src="./images/liquid1.png" alt="Basic Cleaning Kit" class="h-40 object-contain">
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Starter Bundle</h3>
+                        <p class="text-gray-600 mb-4">Essential tools for everyday cleaning</p>
+                        <ul class="space-y-3">
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                <span>Mop Lotion (1L)</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                <span>Surface Cleaner (500ml)</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                <span>3 Mirror Cleaning Cloths</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="mt-auto">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-3xl font-bold text-blue-900">$29.99</span>
+                            <span class="text-gray-500 line-through">$39.99</span>
+                        </div>
+                        <button onclick="addToCart('Starter Bundle', 29.99,'package1','./images/liquid1.png')" 
+                                class="w-full py-3 px-6 bg-orange-400 text-balck font-semibold rounded-lg hover:bg-orange-500 transition-colors duration-300">
+                            Choose Package
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Popular Kit -->
+            <div class="flex flex-col bg-white rounded-xl shadow-2xl border-2 border-blue-600 transform hover:scale-[1.02] transition-all duration-300">
+                <div class="absolute top-4 right-4 bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+                    BEST VALUE
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <div class="mb-6 flex-grow">
+                        <div class="h-48 bg-blue-100 rounded-lg mb-4 flex items-center justify-center">
+                            <img src="./images/liquid2.png" alt="Pro Cleaning Kit" class="h-40 object-contain">
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Professional Bundle</h3>
+                        <p class="text-gray-600 mb-4">Complete cleaning solution for professionals</p>
+                        <ul class="space-y-3">
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                <span>Mop Lotion (2L)</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                <span>Surface Cleaner (1L)</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                <span>5 Mirror Cleaning Cloths</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                <span>Stain Remover Spray</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="mt-auto">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-3xl font-bold text-blue-900">$49.99</span>
+                            <span class="text-gray-500 line-through">$69.99</span>
+                        </div>
+                        <button onclick="addToCart('Professional Bundle', 49.99,'package2','./images/liquid2.png')" 
+                                class="w-full py-3 px-6 bg-orange-400 text-black font-semibold rounded-lg hover:bg-orange-500 transition-colors duration-300">
+                            Choose Package
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Premium Kit -->
+            <div class="flex flex-col bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100">
+                <div class="p-6 flex flex-col flex-grow">
+                    <div class="mb-6 flex-grow">
+                        <div class="h-48 bg-blue-50 rounded-lg mb-4 flex items-center justify-center">
+                            <img src="./images/liquid3.png" alt="Premium Cleaning Kit" class="h-40 object-contain">
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Ultimate Bundle</h3>
+                        <p class="text-gray-600 mb-4">Everything you need for deep cleaning</p>
+                        <ul class="space-y-3">
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                <span>Mop Lotion (5L)</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                <span>Surface Cleaner (2L)</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                <span>10 Mirror Cleaning Cloths</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                <span>Stain Remover Spray</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                <span>Microfiber Mop Head</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="mt-auto">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-3xl font-bold text-blue-900">$79.99</span>
+                            <span class="text-gray-500 line-through">$99.99</span>
+                        </div>
+                        <button onclick="addToCart('Ultimate Bundle', 79.99,'package3','./images/liquid3.png')" 
+                                class="w-full py-3 px-6 bg-orange-400 text-balck font-semibold rounded-lg hover:bg-orange-500 transition-colors duration-300">
+                            Choose Package
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Note -->
+        <div class="mt-12 text-center text-gray-600">
+            <p>All bundles include free shipping and 30-day satisfaction guarantee</p>
+        </div>
+    </div>
+</section>
+
+
+  <!-- Testimonials Section -->
+  <section class="py-16 px-6 md:px-12 bg-blue-50">
+    <div class="container mx-auto">
+      <div class="text-center mb-12">
+        <h2 class="section-title text-3xl sm:text-4xl font-bold text-blue-900 mb-3">What Our Customers Say</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">Trusted by thousands of happy customers worldwide</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-white p-8 rounded-xl shadow-md hover-lift fade-in">
+          <div class="flex items-center mb-4">
+            <div class="flex text-yellow-400 mr-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+            </div>
+          </div>
+          <p class="text-gray-700 mb-6">"The TurboSpin Mop has completely changed how I clean my floors. It's so easy to use and my hardwood has never looked better!"</p>
+          <div class="flex items-center">
+            <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="Sarah J." class="w-12 h-12 rounded-full object-cover mr-4" />
+            <div>
+              <h4 class="font-semibold text-gray-900">Sarah J.</h4>
+              <p class="text-sm text-gray-600">Verified Buyer</p>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white p-8 rounded-xl shadow-md hover-lift fade-in fade-in-delay-1">
+          <div class="flex items-center mb-4">
+            <div class="flex text-yellow-400 mr-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+            </div>
+          </div>
+          <p class="text-gray-700 mb-6">"I was skeptical about the SteamFresh Pro, but after using it on my tile floors, I'm a believer! The steam really sanitizes without chemicals."</p>
+          <div class="flex items-center">
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael T." class="w-12 h-12 rounded-full object-cover mr-4" />
+            <div>
+              <h4 class="font-semibold text-gray-900">Michael T.</h4>
+              <p class="text-sm text-gray-600">Verified Buyer</p>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white p-8 rounded-xl shadow-md hover-lift fade-in fade-in-delay-2">
+          <div class="flex items-center mb-4">
+            <div class="flex text-yellow-400 mr-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-300" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+            </div>
+          </div>
+          <p class="text-gray-700 mb-6">"The microfiber pads are so much better than traditional mop heads. They pick up everything and wash clean every time."</p>
+          <div class="flex items-center">
+            <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Jennifer L." class="w-12 h-12 rounded-full object-cover mr-4" />
+            <div>
+              <h4 class="font-semibold text-gray-900">Jennifer L.</h4>
+              <p class="text-sm text-gray-600">Verified Buyer</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 px-6 md:px-12 bg-blue-900 text-white">
+    <div class="container mx-auto text-center">
+      <h2 class="text-3xl sm:text-4xl font-bold mb-6">Ready for a Cleaner Home?</h2>
+      <p class="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">Join thousands of satisfied customers who have transformed their cleaning routine with our premium products</p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <a href="#products" class="inline-block px-8 py-4 bg-orange-400 text-gray-900 font-semibold rounded-full hover:bg-orange-500 hover:shadow-lg transition-all duration-300">
+          Shop Now
+        </a>
+        <a href="contact.html" class="inline-block px-8 py-4 border-2 border-white text-white font-semibold rounded-full hover:bg-white hover:text-blue-900 transition-colors duration-300">
+          Contact Us
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gradient-to-b from-blue-950 to-blue-900 text-white pt-16 pb-8 px-4 sm:px-6 lg:px-8">
+    <div class="container mx-auto max-w-7xl">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+            <!-- Brand Column -->
+            <div class="space-y-6">
+                <div class="flex items-center">
+                  <div class="text-2xl sm:text-3xl font-bold tracking-tight">
+                    <a href="./index.html" class="hover:text-blue-300 transition-colors duration-300 flex items-center">
+                      <div class="bg-white p-1 rounded-full mr-2">
+                        <img src="./images/logo.png" alt="logo" class="w-8 h-8 sm:w-10 sm:h-10" />
+                      </div>
+                      Maid2Clean
+                    </a>
+                  </div>
+                </div>
+                <p class="text-blue-100 leading-relaxed">Professional cleaning tools for spotless homes and businesses since 2010.</p>
+                <div class="flex space-x-5 pt-2">
+                    <a href="#" class="text-blue-200 hover:text-orange-400 transition-all duration-300 transform hover:-translate-y-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-blue-200 hover:text-orange-400 transition-all duration-300 transform hover:-translate-y-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-blue-200 hover:text-orange-400 transition-all duration-300 transform hover:-translate-y-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Quick Links Column -->
+            <div>
+                <h3 class="text-xl font-bold mb-6 relative inline-block">
+                    <span class="relative z-10">Quick Links</span>
+                    <span class="absolute bottom-0 left-0 w-full h-1 bg-orange-400 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+                </h3>
+                <ul class="space-y-3">
+                    <li><a href="#" class="text-blue-100 hover:text-orange-400 transition-colors duration-300 flex items-center group">
+                        <span class="w-2 h-2 bg-orange-400 rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                        Home
+                    </a></li>
+                    <li><a href="#products" class="text-blue-100 hover:text-orange-400 transition-colors duration-300 flex items-center group">
+                        <span class="w-2 h-2 bg-orange-400 rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                        Products
+                    </a></li>
+                    <li><a href="#deals" class="text-blue-100 hover:text-orange-400 transition-colors duration-300 flex items-center group">
+                        <span class="w-2 h-2 bg-orange-400 rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                        Deals
+                    </a></li>
+                    <li><a href="contact.html" class="text-blue-100 hover:text-orange-400 transition-colors duration-300 flex items-center group">
+                        <span class="w-2 h-2 bg-orange-400 rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                        Contact
+                    </a></li>
+                    <li><a href="checkout.html" class="text-blue-100 hover:text-orange-400 transition-colors duration-300 flex items-center group">
+                        <span class="w-2 h-2 bg-orange-400 rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                        Checkout
+                    </a></li>
+                </ul>
+            </div>
+
+            <!-- Contact Column -->
+            <div>
+                <h3 class="text-xl font-bold mb-6 relative inline-block">
+                    <span class="relative z-10">Contact Us</span>
+                    <span class="absolute bottom-0 left-0 w-full h-1 bg-orange-400 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+                </h3>
+                <ul class="space-y-4">
+                    <li class="flex items-start">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-orange-400 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                        </svg>
+                        <span class="ml-3 text-blue-100">+92 300 1234567</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-orange-400 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                        <span class="ml-3 text-blue-100">support@madetoclean.pk</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-orange-400 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        <span class="ml-3 text-blue-100">123 Clean Street, Karachi, Pakistan</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Newsletter Column -->
+            <div>
+                <h3 class="text-xl font-bold mb-6 relative inline-block">
+                    <span class="relative z-10">Newsletter</span>
+                    <span class="absolute bottom-0 left-0 w-full h-1 bg-orange-400 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+                </h3>
+                <p class="text-blue-100 mb-6">Subscribe for cleaning tips and exclusive offers</p>
+                <form class="space-y-4">
+                    <div class="relative">
+                        <input type="email" placeholder="Your Email" class="w-full px-5 py-3 rounded-full bg-blue-800 text-white placeholder-blue-300 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:bg-blue-700 transition-all duration-300" required />
+                    </div>
+                    <button type="submit" class="w-full px-6 py-3 bg-gradient-to-r from-orange-400 to-yellow-400 text-gray-900 font-semibold rounded-full hover:from-orange-500 hover:to-yellow-500 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-orange-400/20">
+                        Subscribe
+                    </button>
+                </form>
+                <p class="text-xs text-blue-300 mt-4">We respect your privacy. Unsubscribe at any time.</p>
+            </div>
+        </div>
+
+        <!-- Copyright Section -->
+        <div class="border-t border-blue-800 mt-12 pt-8 text-center">
+            <p class="text-blue-300 text-sm">© 2025 Maid2Clean. All rights reserved. Designed with <span class="text-orange-400">❤️</span> for clean homes everywhere.</p>
+            <div class="flex justify-center space-x-6 mt-4">
+                <a href="#" class="text-blue-300 hover:text-white text-sm transition-colors duration-300">Privacy Policy</a>
+                <a href="#" class="text-blue-300 hover:text-white text-sm transition-colors duration-300">Terms of Service</a>
+                <a href="#" class="text-blue-300 hover:text-white text-sm transition-colors duration-300">Sitemap</a>
+            </div>
+        </div>
+
+    </div>
+    
+</footer>
+<div id="cartNotification" class="cart-notification">
+  <svg class="checkmark" viewBox="0 0 24 24">
+    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+  </svg>
+  <span id="notificationText"></span>
+</div>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script src="./js/index.js"></script>
+
+</body>
+</html>

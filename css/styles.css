@@ -1,0 +1,190 @@
+body {
+    font-family: 'Poppins', sans-serif;
+  }
+  /* Marquee Animation */
+@keyframes marquee {
+0% { transform: translateX(0); }
+100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+animation: marquee 20s linear infinite;
+display: inline-block;
+}
+
+/* Pause animation on hover */
+.animate-marquee:hover {
+animation-play-state: paused;
+}
+  
+  /* Custom Animations */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+  .fade-in-delay-1 { animation-delay: 0.2s; }
+  .fade-in-delay-2 { animation-delay: 0.4s; }
+  .fade-in-delay-3 { animation-delay: 0.6s; }
+  .hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .hover-lift:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+  }
+  .navbar-scrolled {
+    background-color: rgba(32, 64, 151, 0.98);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+  .swiper-slide .banner-content {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 1s ease;
+  }
+  .swiper-slide-active .banner-content {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .pulse {
+    animation: pulse 2s infinite;
+  }
+  @keyframes fadeIn {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+  /* Smooth Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #0077b6;
+    border-radius: 4px;
+  }
+  /* Product Card Hover Effect */
+  .product-card {
+    transition: all 0.3s ease;
+  }
+  .product-card:hover .product-image {
+    transform: scale(1.05);
+  }
+  .product-image {
+    transition: transform 0.5s ease;
+  }
+  /* Responsive Tweaks */
+  @media (max-width: 640px) {
+    .hero-title { font-size: 2rem; line-height: 1.2; }
+    .hero-subtitle { font-size: 1rem; }
+    .section-title { font-size: 1.8rem; }
+    .search-container { display: none; }
+    .mobile-menu-item { padding: 12px 0; }
+  }
+  @media (min-width: 768px) {
+    .hero-height { height: 90vh; }
+  }
+  /* Special Offer Ribbon */
+  .ribbon {
+    position: absolute;
+    right: -5px; top: -5px;
+    z-index: 1;
+    overflow: hidden;
+    width: 75px; height: 75px;
+    text-align: right;
+  }
+  .ribbon span {
+    font-size: 0.8rem;
+    color: #fff;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 20px;
+    transform: rotate(45deg);
+    width: 100px;
+    display: block;
+    background: #ff9f1c;
+    box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
+    position: absolute;
+    top: 19px; right: -21px;
+  }
+  .ribbon span::before {
+    content: "";
+    position: absolute; left: 0px; top: 100%;
+    z-index: -1;
+    border-left: 3px solid #d35400;
+    border-right: 3px solid transparent;
+    border-bottom: 3px solid transparent;
+    border-top: 3px solid #d35400;
+  }
+  .ribbon span::after {
+    content: "";
+    position: absolute; right: 0px; top: 100%;
+    z-index: -1;
+    border-left: 3px solid transparent;
+    border-right: 3px solid #d35400;
+    border-bottom: 3px solid transparent;
+    border-top: 3px solid #d35400;
+  }
+  /* Product card styling */
+.product-card {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.product-card:hover {
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* Animation for product cards */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.product-card {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+/* Delay animations for each card */
+.product-card:nth-child(1) { animation-delay: 0.1s; }
+.product-card:nth-child(2) { animation-delay: 0.2s; }
+.product-card:nth-child(3) { animation-delay: 0.3s; }
+.product-card:nth-child(4) { animation-delay: 0.4s; }
+
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 34px;
+}
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+input:checked + .toggle-slider {
+  background-color: #3B82F6;
+}
+input:checked + .toggle-slider:before {
+  transform: translateX(30px);
+}
+
+  
