@@ -193,17 +193,14 @@ function showToast(message) {
     const submitBtn = document.getElementById('button');
     const form = document.getElementById('checkout-form');
     
-    // Show loading state
-    submitBtn.disabled = true;
-    const originalText = submitBtn.innerHTML;
-    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Sending...';
+   
   
     // Prepare email data
     const templateParams = {
-      from_name: document.getElementById('name').value,
-      from_email: document.getElementById('email').value,
-      phone_number: document.getElementById('phone').value || 'Not provided',
-      subject: document.getElementById('address').value,
+      name: document.getElementById('name').value,
+      email: document.getElementById('email').value,
+      phone: document.getElementById('phone').value || 'Not provided',
+      address: document.getElementById('address').value,
       date: new Date().toLocaleString()
     };
   
