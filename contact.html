@@ -59,6 +59,13 @@
   opacity: 1;
   visibility: visible;
 }
+#message-modal {
+  transition: opacity 300ms ease, transform 300ms ease;
+}
+
+#message-modal div {
+  transition: transform 300ms ease;
+}
   </style>
   
     <script type="text/javascript"
@@ -569,6 +576,32 @@
         </div>
     </div>
 </footer>
+<!-- Message Modal -->
+<div id="message-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 opacity-0 pointer-events-none transition-opacity duration-300">
+  <div class="bg-white rounded-lg p-6 max-w-md w-full transform scale-95 transition-transform duration-300">
+    <div class="text-center">
+      <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100 mb-4 success-icon">
+        <svg class="h-6 w-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+      </div>
+      <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100 mb-4 error-icon hidden">
+        <svg class="h-6 w-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </div>
+      <h3 class="text-lg font-medium text-gray-900 mb-2 modal-title">Message Sent!</h3>
+      <p class="text-sm text-gray-500 mb-4 modal-message">
+        Thank you for contacting us. We'll respond shortly.
+      </p>
+      <div class="mt-5">
+        <button onclick="closeMessageModal()" type="button" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors duration-200">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     // Mobile menu toggle

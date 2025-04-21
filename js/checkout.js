@@ -187,24 +187,59 @@ function showToast(message) {
     emailjs.init('ojLsDsUFEr7AvxogL');
   })();
   
-  function SendMail(event) {
+  // Update the SendMail function
+function SendMail(event) {
     event.preventDefault();
     
     const submitBtn = document.getElementById('button');
     const form = document.getElementById('checkout-form');
-    
-   
   
-    // Prepare email data
+    // Format cart items for email
+    const orderList = cart.map(item => 
+      `${item.name} - Quantity: ${item.quantity} - Price: $${(item.price * item.quantity).toFixed(2)}`
+    ).join('\n');
+  
+    const totalAmount = document.getElementById('total').textContent;
+  
+    // Prepare email data with order details
     const templateParams = {
       name: document.getElementById('name').value,
       email: document.getElementById('email').value,
       phone: document.getElementById('phone').value || 'Not provided',
       address: document.getElementById('address').value,
+      order_list: orderList,
+      total: totalAmount,
       date: new Date().toLocaleString()
     };
   
-    // Send email with complete handling
-    emailjs.send('service_zxwz8zk', 'template_mrh9kf5', templateParams).then(alert('Email sent successfully!'))
-  }
+    // Send email
+    emailjs.send('service_zxwz8zk', 'template_ffrehav', templateParams)
+  .then(() => {
+    // Show confirmation modal
+    const modal = document.getElementById('confirmation-modal');
+    modal.classList.remove('opacity-0', 'pointer-events-none');
+    modal.querySelector('div').classList.remove('scale-95');
+    
+    // Clear cart
+    localStorage.removeItem('cart');
+    cart = [];
+    
+    // Reset form
+    form.reset();
+    
+    // Redirect to home page after delay
+    setTimeout(() => {
+      window.location.href = "index.html";
+    }, 3000);
+  })
+  .catch(error => {
+    console.error('Email send failed:', error);
+    // Optional: Show error in modal or other UI element instead of alert
+    const modal = document.getElementById('confirmation-modal');
+    modal.querySelector('h3').textContent = "Order Failed!";
+    modal.querySelector('p').textContent = "Failed to send confirmation. Please try again.";
+    modal.classList.remove('opacity-0', 'pointer-events-none');
+    modal.querySelector('div').classList.remove('scale-95');
+  });
 
+}
